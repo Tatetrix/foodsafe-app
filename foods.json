@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "version": "0.1-mock",
+    "note": "DỮ LIỆU GIẢ để dựng UI, CHƯA được kiểm chứng y khoa. Sẽ thay bằng dataset của Quảng. Giữ nguyên schema.",
+    "attpScale": "0-10, điểm càng cao càng an toàn",
+    "levels": ["green", "yellow", "red"],
+    "profiles": ["normal", "diabetes", "gout", "pregnancy"]
+  },
+  "profiles": [
+    { "id": "normal", "label": "Bình thường", "description": "Người khỏe mạnh", "emoji": "🙂" },
+    { "id": "diabetes", "label": "Tiểu đường Type 2", "description": "Cần kiểm soát đường huyết", "emoji": "🩸" },
+    { "id": "gout", "label": "Gút", "description": "Axit uric cao, hạn chế purin", "emoji": "🦶" },
+    { "id": "pregnancy", "label": "Mang thai", "description": "Ưu tiên an toàn thực phẩm", "emoji": "🤰" }
+  ],
+  "sources": [
+    { "id": "S01", "name": "Bảng thành phần thực phẩm Việt Nam (Viện Dinh dưỡng - NIN)", "url": null, "verified": false },
+    { "id": "S02", "name": "Hướng dẫn dinh dưỡng cho bệnh nhân đái tháo đường (Bộ Y tế / ADA)", "url": null, "verified": false },
+    { "id": "S03", "name": "Khuyến cáo chế độ ăn cho người bệnh gút (Bộ Y tế / hội chuyên ngành)", "url": null, "verified": false },
+    { "id": "S04", "name": "Khuyến cáo an toàn thực phẩm cho phụ nữ mang thai", "url": null, "verified": false },
+    { "id": "S05", "name": "Khuyến cáo WHO về natri, đường tự do, chất béo", "url": null, "verified": false },
+    { "id": "S06", "name": "Cục An toàn thực phẩm - Bộ Y tế (khuyến cáo ATTP)", "url": null, "verified": false }
+  ],
+  "foods": [
+    {
+      "id": "lau-hai-san",
+      "name": "Lẩu hải sản",
+      "aliases": ["lau hai san", "lẩu thái hải sản", "hotpot hải sản"],
+      "type": "dish",
+      "category": "Món nước",
+      "emoji": "🍲",
+      "attp": {
+        "score": 6,
+        "risks": [
+          { "label": "Hải sản không tươi có thể gây ngộ độc histamine", "level": "medium" },
+          { "label": "Nước lẩu nhiều muối, bột ngọt", "level": "medium" },
+          { "label": "Hải sản chưa chín kỹ có nguy cơ vi sinh", "level": "medium" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "yellow",
+          "reason": "Nước lẩu thường mặn, ăn thường xuyên không tốt cho tim mạch.",
+          "advice": "Ăn vừa phải, hạn chế húp nước lẩu, ăn kèm nhiều rau."
+        },
+        "diabetes": {
+          "level": "yellow",
+          "reason": "Bản thân hải sản ít tinh bột nhưng bún, mì ăn kèm và nước lẩu nêm đường dễ làm tăng đường huyết.",
+          "advice": "Hạn chế bún/mì, ưu tiên rau và đạm nạc, không húp nước lẩu."
+        },
+        "gout": {
+          "level": "red",
+          "reason": "Hải sản (tôm, mực, sò) giàu purin, nước lẩu cô đặc purin, dễ làm tăng axit uric và khởi phát cơn gút.",
+          "advice": "Nên tránh. Nếu vẫn ăn: rất ít, không húp nước lẩu, không uống bia rượu kèm."
+        },
+        "pregnancy": {
+          "level": "yellow",
+          "reason": "Hải sản chỉ nên ăn khi nấu chín kỹ. Một số loại cá lớn có thể chứa nhiều thủy ngân.",
+          "advice": "Nấu chín kỹ, tránh hải sản sống/tái, chọn hải sản tươi, hỏi bác sĩ về loại nên tránh."
+        }
+      },
+      "alternatives": {
+        "normal": ["ca-hap-rau-luoc"],
+        "diabetes": ["canh-rau-thit-bam-nac", "ca-hap-rau-luoc"],
+        "gout": ["com-ga-luoc", "canh-rau-thit-bam-nac"],
+        "pregnancy": ["com-ga-luoc", "ca-hap-rau-luoc"]
+      },
+      "sources": ["S01", "S03", "S04", "S06"]
+    },
+    {
+      "id": "tra-sua",
+      "name": "Trà sữa trân châu",
+      "aliases": ["tra sua", "tra sua tran chau", "trà sữa"],
+      "type": "dish",
+      "category": "Đồ uống",
+      "emoji": "🧋",
+      "attp": {
+        "score": 6,
+        "risks": [
+          { "label": "Rất nhiều đường, chất béo từ bột kem", "level": "high" },
+          { "label": "Nguồn gốc nguyên liệu pha chế khó kiểm soát ở quán nhỏ", "level": "medium" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "yellow",
+          "reason": "Lượng đường và calo cao, uống thường xuyên dễ tăng cân.",
+          "advice": "Chọn size nhỏ, ít đường, ít trân châu, không quá 1-2 ly/tuần."
+        },
+        "diabetes": {
+          "level": "red",
+          "reason": "Đường tự do và tinh bột từ trân châu làm đường huyết tăng nhanh.",
+          "advice": "Nên tránh. Thay bằng trà xanh không đường."
+        },
+        "gout": {
+          "level": "yellow",
+          "reason": "Không giàu purin nhưng đường fructose cao có thể làm tăng axit uric.",
+          "advice": "Hạn chế, chọn ít đường, không thêm topping nhiều."
+        },
+        "pregnancy": {
+          "level": "yellow",
+          "reason": "Có caffeine từ trà và nhiều đường.",
+          "advice": "Chọn ít đường, giới hạn lượng caffeine trong ngày, hỏi bác sĩ về mức phù hợp."
+        }
+      },
+      "alternatives": {
+        "normal": ["tra-xanh-khong-duong"],
+        "diabetes": ["tra-xanh-khong-duong"],
+        "gout": ["tra-xanh-khong-duong"],
+        "pregnancy": []
+      },
+      "sources": ["S02", "S05"]
+    },
+    {
+      "id": "xien-chien-via-he",
+      "name": "Xiên chiên vỉa hè",
+      "aliases": ["xien ban", "xiên bẩn", "xien chien", "xiên que chiên"],
+      "type": "risky_food",
+      "category": "Ăn vặt",
+      "emoji": "🍢",
+      "attp": {
+        "score": 3,
+        "risks": [
+          { "label": "Dầu chiên dùng lại nhiều lần, tạo chất độc hại", "level": "high" },
+          { "label": "Nguồn gốc nguyên liệu không rõ, bảo quản ngoài trời", "level": "high" },
+          { "label": "Chế biến thiếu vệ sinh, nguy cơ nhiễm khuẩn", "level": "medium" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "yellow",
+          "reason": "Rủi ro chủ yếu từ dầu chiên cũ và vệ sinh, không nên ăn thường xuyên.",
+          "advice": "Ăn thỉnh thoảng, chọn quán sạch, thấy dầu đen đục thì không ăn."
+        },
+        "diabetes": {
+          "level": "red",
+          "reason": "Chiên nhiều dầu, tẩm bột, chấm sốt ngọt, vừa tăng đường huyết vừa tăng mỡ máu.",
+          "advice": "Nên tránh. Chọn món hấp luộc thay thế."
+        },
+        "gout": {
+          "level": "red",
+          "reason": "Xiên thường có viên thịt, nội tạng, xúc xích. Chiên nhiều dầu và hay đi kèm bia.",
+          "advice": "Nên tránh, đặc biệt các xiên nội tạng và khi uống bia."
+        },
+        "pregnancy": {
+          "level": "red",
+          "reason": "Vệ sinh và độ chín không đảm bảo, nguy cơ nhiễm khuẩn có thể ảnh hưởng thai kỳ.",
+          "advice": "Nên tránh. Ưu tiên đồ ăn nấu chín kỹ, nấu tại nhà."
+        }
+      },
+      "alternatives": {
+        "normal": ["com-ga-luoc", "canh-rau-thit-bam-nac"],
+        "diabetes": ["canh-rau-thit-bam-nac", "ca-hap-rau-luoc"],
+        "gout": ["com-ga-luoc", "canh-rau-thit-bam-nac"],
+        "pregnancy": ["com-ga-luoc", "canh-rau-thit-bam-nac", "ca-hap-rau-luoc"]
+      },
+      "sources": ["S05", "S06"]
+    },
+    {
+      "id": "goi-cuon-tom",
+      "name": "Gỏi cuốn tôm thịt",
+      "aliases": ["goi cuon", "gỏi cuốn", "goi cuon tom thit"],
+      "type": "dish",
+      "category": "Ăn vặt",
+      "emoji": "🥗",
+      "attp": {
+        "score": 7,
+        "risks": [
+          { "label": "Rau sống nếu rửa không kỹ có thể mang vi khuẩn", "level": "medium" },
+          { "label": "Nước chấm có thể nhiều đường và muối", "level": "low" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "green",
+          "reason": "Nhiều rau, ít dầu mỡ, tôm thịt luộc chín.",
+          "advice": "Ăn bình thường, chú ý nước chấm vừa phải."
+        },
+        "diabetes": {
+          "level": "yellow",
+          "reason": "Bánh tráng và bún là tinh bột, nước chấm thường có đường.",
+          "advice": "Ăn lượng vừa, ít bún, hạn chế nước chấm ngọt."
+        },
+        "gout": {
+          "level": "yellow",
+          "reason": "Tôm chứa purin ở mức đáng kể.",
+          "advice": "Ăn ít tôm, tăng rau, không kèm bia rượu."
+        },
+        "pregnancy": {
+          "level": "yellow",
+          "reason": "Rau sống cần rửa thật kỹ, tôm thịt phải chín hẳn.",
+          "advice": "Ăn ở nơi uy tín hoặc tự làm, rửa rau kỹ, đảm bảo tôm thịt chín."
+        }
+      },
+      "alternatives": {
+        "normal": [],
+        "diabetes": ["canh-rau-thit-bam-nac", "ca-hap-rau-luoc"],
+        "gout": ["canh-rau-thit-bam-nac", "com-ga-luoc"],
+        "pregnancy": ["ca-hap-rau-luoc", "com-ga-luoc"]
+      },
+      "sources": ["S01", "S03", "S04"]
+    },
+    {
+      "id": "com-ga-luoc",
+      "name": "Cơm gà luộc",
+      "aliases": ["com ga luoc", "cơm gà", "gà luộc"],
+      "type": "dish",
+      "category": "Món chính",
+      "emoji": "🍗",
+      "attp": {
+        "score": 8,
+        "risks": [
+          { "label": "Gà cần luộc chín kỹ để tránh vi khuẩn", "level": "low" },
+          { "label": "Nước chấm mặn nếu dùng nhiều", "level": "low" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "green",
+          "reason": "Chế biến luộc, ít dầu mỡ, đạm nạc.",
+          "advice": "Có thể ăn thường xuyên, ăn kèm rau."
+        },
+        "diabetes": {
+          "level": "yellow",
+          "reason": "Cơm trắng làm tăng đường huyết nếu ăn nhiều.",
+          "advice": "Giảm lượng cơm, thêm rau, bỏ da gà."
+        },
+        "gout": {
+          "level": "green",
+          "reason": "Thịt gà luộc bỏ da có purin ở mức vừa phải, dễ kiểm soát hơn hải sản và nội tạng.",
+          "advice": "Ăn lượng vừa, bỏ da, không uống nước luộc cô đặc."
+        },
+        "pregnancy": {
+          "level": "green",
+          "reason": "Gà luộc chín kỹ là lựa chọn an toàn, cung cấp đạm.",
+          "advice": "Đảm bảo gà chín hoàn toàn, ăn kèm rau chín."
+        }
+      },
+      "alternatives": {
+        "normal": [],
+        "diabetes": ["canh-rau-thit-bam-nac", "ca-hap-rau-luoc"],
+        "gout": [],
+        "pregnancy": []
+      },
+      "sources": ["S01", "S02", "S03", "S04"]
+    },
+    {
+      "id": "canh-rau-thit-bam-nac",
+      "name": "Canh rau thịt băm nạc",
+      "aliases": ["canh rau", "canh thit bam", "canh rau thit bam nac"],
+      "type": "dish",
+      "category": "Món nước",
+      "emoji": "🥬",
+      "attp": {
+        "score": 9,
+        "risks": [
+          { "label": "Nêm nhiều muối hoặc bột ngọt sẽ làm tăng natri", "level": "low" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "green",
+          "reason": "Nhiều rau, ít béo, nấu chín kỹ.",
+          "advice": "Phù hợp ăn hằng ngày."
+        },
+        "diabetes": {
+          "level": "green",
+          "reason": "Nhiều chất xơ, ít tinh bột, ít đường.",
+          "advice": "Nên nêm nhạt, không thêm đường."
+        },
+        "gout": {
+          "level": "green",
+          "reason": "Rau là nguồn tốt, lượng thịt nạc ít nên purin thấp.",
+          "advice": "Giữ lượng thịt băm vừa phải, không nấu bằng xương hầm."
+        },
+        "pregnancy": {
+          "level": "green",
+          "reason": "Món nấu chín, nhiều rau, nhẹ bụng.",
+          "advice": "Rửa rau kỹ, nấu chín hoàn toàn."
+        }
+      },
+      "alternatives": { "normal": [], "diabetes": [], "gout": [], "pregnancy": [] },
+      "sources": ["S01", "S02", "S03", "S04"]
+    },
+    {
+      "id": "ca-hap-rau-luoc",
+      "name": "Cá hấp và rau luộc",
+      "aliases": ["ca hap", "cá hấp", "ca hap rau luoc"],
+      "type": "dish",
+      "category": "Món chính",
+      "emoji": "🐟",
+      "attp": {
+        "score": 9,
+        "risks": [
+          { "label": "Cá cần tươi và hấp chín kỹ", "level": "low" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "green",
+          "reason": "Hấp giữ dinh dưỡng, ít dầu mỡ.",
+          "advice": "Ăn thường xuyên, ưu tiên cá tươi."
+        },
+        "diabetes": {
+          "level": "green",
+          "reason": "Giàu đạm, ít tinh bột, không dùng nhiều đường khi nấu.",
+          "advice": "Ăn kèm rau, kiểm soát lượng cơm."
+        },
+        "gout": {
+          "level": "yellow",
+          "reason": "Một số loại cá có purin trung bình đến cao.",
+          "advice": "Chọn cá nước ngọt ít purin, ăn lượng vừa, tránh cá nhỏ, cá mòi."
+        },
+        "pregnancy": {
+          "level": "green",
+          "reason": "Cá nấu chín là nguồn đạm tốt khi chọn loại ít thủy ngân.",
+          "advice": "Hấp chín hoàn toàn, tránh cá lớn nhiều thủy ngân, hỏi bác sĩ về loại cá phù hợp."
+        }
+      },
+      "alternatives": {
+        "normal": [],
+        "diabetes": [],
+        "gout": ["com-ga-luoc", "canh-rau-thit-bam-nac"],
+        "pregnancy": []
+      },
+      "sources": ["S01", "S03", "S04"]
+    },
+    {
+      "id": "tra-xanh-khong-duong",
+      "name": "Trà xanh không đường",
+      "aliases": ["tra xanh", "trà xanh", "tra xanh khong duong"],
+      "type": "dish",
+      "category": "Đồ uống",
+      "emoji": "🍵",
+      "attp": {
+        "score": 9,
+        "risks": [
+          { "label": "Nguồn nước và vệ sinh ly cốc nếu mua ngoài", "level": "low" }
+        ]
+      },
+      "profiles": {
+        "normal": {
+          "level": "green",
+          "reason": "Không đường, ít calo.",
+          "advice": "Uống vừa phải trong ngày."
+        },
+        "diabetes": {
+          "level": "green",
+          "reason": "Không đường nên không làm tăng đường huyết.",
+          "advice": "Nhớ chọn loại không đường."
+        },
+        "gout": {
+          "level": "green",
+          "reason": "Không chứa purin đáng kể, thay thế tốt cho đồ uống có đường hoặc bia.",
+          "advice": "Uống đủ nước trong ngày."
+        },
+        "pregnancy": {
+          "level": "yellow",
+          "reason": "Có caffeine, cần giới hạn khi mang thai.",
+          "advice": "Uống lượng nhỏ, hỏi bác sĩ về giới hạn caffeine mỗi ngày."
+        }
+      },
+      "alternatives": { "normal": [], "diabetes": [], "gout": [], "pregnancy": [] },
+      "sources": ["S02", "S04", "S05"]
+    }
+  ]
+}
